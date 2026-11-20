@@ -1,0 +1,1262 @@
+/* 北京浮生记. Everything inside the frame is the game's own picture: blue
+   ground, yellow type, cyan aids, black line, like a cheap four-colour paper.
+   That is why the kit's appearance tokens are not used here. The window
+   frame, the title and the menus are the desk's and follow its appearance.
+   Dark mode swaps paper and ink and nothing else. No rounded corners, no
+   gradients, no shadows except the one hard cyan edge the icons have. */
+
+:root {
+  --blue: #0000ff;
+  --paper: #ffffff;
+  --ink: #000000;
+  --yellow: #ffff00;
+  --cyan: #00ffff;
+  --gray: #707070;
+  --rule: #c0c0c0;
+  --on-blue: #ffffff;
+  --serif: "Songti SC", "STSong", "SimSun", "Noto Serif CJK SC", serif;
+  --sans: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --row: 30px;
+  --gap: 8px;
+}
+
+:root[data-mode="dark"] {
+  --blue: #0000c8;
+  --paper: #0a0a14;
+  --ink: #ffffff;
+  --gray: #9a9a9a;
+  --rule: #404040;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--blue);
+  color: var(--ink);
+  font: 14px / 1.5 var(--sans);
+  -webkit-text-size-adjust: 100%;
+  overflow: auto;
+}
+
+h1,
+h2,
+p,
+dl,
+dd {
+  margin: 0;
+}
+
+.bf-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.bf-icon {
+  flex: none;
+  display: block;
+}
+
+/* ---- the page ------------------------------------------------------------- */
+
+.bf {
+  box-sizing: border-box;
+  height: 100%;
+  min-height: 596px;
+  padding: 10px;
+  display: grid;
+  gap: var(--gap);
+  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  /* The desk never gets shorter than the eight goods; a smaller window scrolls instead of hiding a row. */
+  grid-template-rows: auto minmax(308px, 1fr) auto auto;
+  grid-template-areas:
+    "head head"
+    "desk desk"
+    "ledger map"
+    "venues venues";
+  background: var(--blue);
+}
+
+.bf-head {
+  grid-area: head;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  color: var(--yellow);
+}
+
+.bf-title {
+  font: 700 20px / 1.2 var(--serif);
+  white-space: nowrap;
+}
+
+.bf-where {
+  margin-left: auto;
+  font: 700 16px / 1.2 var(--serif);
+  white-space: nowrap;
+}
+
+.bf-dots {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 560px;
+}
+
+.bf-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffffff;
+  transition: background-color 120ms linear;
+}
+
+.bf-dot-gone {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px #ffffff;
+}
+
+.bf-heading {
+  font: 700 14px / 1.3 var(--serif);
+  color: var(--yellow);
+  margin-bottom: 4px;
+}
+
+/* ---- paper ------------------------------------------------------------------ */
+
+.bf-desk {
+  grid-area: desk;
+  min-height: 0;
+  display: flex;
+}
+
+.bf-trading {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  gap: var(--gap);
+  grid-template-columns: minmax(0, 5fr) minmax(150px, 2.2fr) minmax(0, 5fr);
+  align-items: stretch;
+}
+
+.bf-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  align-self: start;
+  table-layout: fixed;
+}
+
+.bf-trading > .bf-table {
+  align-self: stretch;
+  display: block;
+  overflow: auto;
+}
+
+.bf-trading > .bf-table > * {
+  width: 100%;
+}
+
+.bf-table caption {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 3px 8px;
+  text-align: left;
+  background: var(--paper);
+  border-bottom: 2px solid var(--ink);
+}
+
+.bf-table thead,
+.bf-table tbody {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.bf-caption {
+  font: 700 16px / 1.3 var(--serif);
+  white-space: pre;
+}
+
+.bf-caption-side {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font: 14px var(--mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.bf-table th,
+.bf-table td {
+  height: var(--row);
+  padding: 0 8px;
+  box-sizing: border-box;
+  text-align: left;
+  font-weight: 400;
+  border-bottom: 1px solid var(--rule);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.bf-table thead th {
+  height: 22px;
+  font-size: 12px;
+  color: var(--gray);
+  border-bottom: 1px solid var(--ink);
+}
+
+.bf-cell {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.bf-table .bf-num,
+.bf-num {
+  width: 92px;
+  text-align: right;
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.bf-room .bf-num:last-child,
+.bf-market .bf-held-count,
+.bf-market thead .bf-num:last-child:not(:nth-child(2)) {
+  width: 56px;
+}
+
+.bf-row {
+  cursor: default;
+}
+
+.bf-row[aria-selected="true"] > * {
+  background: var(--blue);
+  color: #ffffff;
+}
+
+.bf-row-none > *,
+.bf-row-poor .bf-num {
+  color: var(--gray);
+}
+
+.bf-row[aria-selected="true"] .bf-note,
+.bf-row[aria-selected="true"] .bf-sub,
+.bf-row-none[aria-selected="true"] > *,
+.bf-row-poor[aria-selected="true"] .bf-num {
+  color: #ffffff;
+}
+
+.bf-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bf-tag {
+  flex: none;
+  padding: 0 4px;
+  font-size: 12px;
+  line-height: 18px;
+  color: #000000;
+}
+
+.bf-tag-held {
+  background: var(--cyan);
+}
+
+.bf-tag-up {
+  background: var(--yellow);
+  font-weight: 700;
+}
+
+.bf-tag-down {
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: 700;
+}
+
+.bf-note {
+  flex: none;
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--gray);
+}
+
+.bf-cell-two {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  line-height: 1.25;
+}
+
+.bf-row-held th {
+  height: 40px;
+}
+
+.bf-row-held td {
+  height: 40px;
+}
+
+.bf-sub {
+  font-size: 12px;
+  color: var(--gray);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- buying and selling ------------------------------------------------------ */
+
+.bf-trade {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: min-content;
+  gap: 6px;
+  align-content: start;
+  padding: 8px;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+}
+
+.bf-trade-goods {
+  grid-column: 1 / -1;
+  min-height: 21px;
+  font-weight: 700;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.bf-trade-quantity,
+.bf-trade-hint,
+.bf-buy,
+.bf-sell {
+  grid-column: 1 / -1;
+}
+
+.bf-trade-hint {
+  min-height: 42px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.bf-input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 30px;
+  padding: 0 6px;
+  border: 2px solid var(--ink);
+  border-radius: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 16px var(--mono);
+  text-align: right;
+}
+
+.bf-input-name {
+  font-family: var(--sans);
+  text-align: left;
+  max-width: 220px;
+}
+
+.bf-input::placeholder {
+  color: var(--gray);
+}
+
+.bf-input:disabled {
+  border-color: var(--rule);
+}
+
+.bf-button {
+  box-sizing: border-box;
+  min-height: 30px;
+  padding: 2px 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 2px solid var(--ink);
+  border-radius: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 14px / 1.3 var(--sans);
+  white-space: pre;
+  cursor: default;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+.bf-button:active:not(:disabled) {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.bf-button:disabled {
+  color: var(--gray);
+  border-color: var(--gray);
+}
+
+.bf-primary {
+  background: var(--yellow);
+  color: #000000;
+  border-color: #000000;
+  font-weight: 700;
+}
+
+.bf-buy,
+.bf-sell {
+  flex-wrap: wrap;
+  min-height: 44px;
+  font-weight: 700;
+}
+
+.bf-arrow {
+  font-family: var(--mono);
+}
+
+.bf-sum {
+  flex-basis: 100%;
+  text-align: center;
+  font: 400 12px var(--mono);
+}
+
+.bf-all {
+  font-family: var(--mono);
+}
+
+:focus-visible {
+  outline: 2px solid #000000;
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px var(--yellow);
+  position: relative;
+  z-index: 1;
+}
+
+.bf-row:focus-visible {
+  outline-offset: -2px;
+  box-shadow: none;
+  outline: 2px solid var(--yellow);
+}
+
+.bf-row:focus-visible > * {
+  box-shadow:
+    inset 0 2px 0 var(--yellow),
+    inset 0 -2px 0 var(--yellow);
+}
+
+/* ---- the five numbers ---------------------------------------------------------- */
+
+.bf-ledger {
+  grid-area: ledger;
+  min-width: 0;
+}
+
+.bf-ledger dl,
+.bf-closing {
+  background: var(--paper);
+  border: 2px solid var(--ink);
+}
+
+.bf-ledger dl > div,
+.bf-closing > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  height: var(--row);
+  line-height: var(--row);
+  padding: 0 8px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.bf-ledger dl > div:last-child,
+.bf-closing > div:last-child {
+  border-bottom: 0;
+}
+
+.bf-ledger dt,
+.bf-closing dt {
+  white-space: pre;
+}
+
+.bf-ledger dd,
+.bf-closing dd {
+  font: 16px var(--mono);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.bf-delta {
+  margin-right: 8px;
+  padding: 0 4px;
+  background: var(--yellow);
+  color: #000000;
+  font-size: 12px;
+}
+
+.bf-owed dd {
+  font-weight: 700;
+}
+
+.bf-ledger .bf-alarm {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* ---- the ten places --------------------------------------------------------------- */
+
+.bf-map {
+  grid-area: map;
+  min-width: 0;
+}
+
+.bf-ring {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-rows: repeat(3, 44px);
+  gap: 9px 0;
+  grid-template-areas:
+    "tog tog p3 p7 p5"
+    "p10 p9 p6 . p1"
+    "bos bos p8 p4 p2";
+}
+
+/* The ring line: a square loop through the eight ring stations, and the
+   stretch out west to 苹果园. */
+.bf-loop,
+.bf-spur {
+  position: absolute;
+  pointer-events: none;
+}
+
+.bf-loop {
+  left: 50%;
+  right: 10%;
+  top: 22px;
+  bottom: 22px;
+  border: 3px solid #000000;
+  background: transparent;
+  box-shadow: 3px 3px 0 var(--cyan);
+}
+
+.bf-spur {
+  left: 10%;
+  width: 40%;
+  top: calc(50% - 1.5px);
+  border-top: 3px solid #000000;
+  box-shadow: 3px 3px 0 var(--cyan);
+}
+
+.bf-station,
+.bf-toggle,
+.bf-boss {
+  position: relative;
+  margin: 0 4px;
+  padding: 2px 4px;
+  min-height: 44px;
+}
+
+.bf-toggle {
+  grid-area: tog;
+}
+
+.bf-boss {
+  grid-area: bos;
+  font-weight: 700;
+}
+
+.bf-station[aria-current] {
+  background: var(--yellow);
+  color: #000000;
+  border-color: #000000;
+  font-weight: 700;
+}
+
+.bf-station[aria-current]:disabled {
+  color: #000000;
+}
+
+.bf-venues {
+  grid-area: venues;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--gap);
+}
+
+.bf-venues .bf-button {
+  min-height: 36px;
+  padding: 2px 4px;
+}
+
+.bf-venues .bf-button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* ---- a page: the world interrupts ---------------------------------------------------- */
+
+.bf-page,
+.bf-slip,
+.bf-ending {
+  flex: 1;
+  min-width: 0;
+  box-sizing: border-box;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  overflow: auto;
+}
+
+.bf-page {
+  display: flex;
+  gap: 16px;
+  padding: 12px;
+  overflow: hidden;
+}
+
+.bf-art {
+  flex: none;
+  height: 100%;
+  max-height: 260px;
+  width: auto;
+  aspect-ratio: 1626 / 2048;
+  align-self: flex-start;
+  border: 2px solid #000000;
+}
+
+.bf-page-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  overflow: auto;
+}
+
+.bf-page-title,
+.bf-slip-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  font: 700 20px / 1.3 var(--serif);
+  padding-bottom: 4px;
+  border-bottom: 3px double var(--ink);
+}
+
+.bf-page-count {
+  margin-left: auto;
+  font: 400 12px var(--mono);
+}
+
+.bf-page-text {
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.bf-page-diary .bf-page-text {
+  font-family: var(--serif);
+}
+
+.bf-page-text p + p {
+  margin-top: 4px;
+}
+
+.bf-slip {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+}
+
+.bf-slip-body {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+
+.bf-prose {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.bf-prose + .bf-prose {
+  margin-top: 4px;
+}
+
+.bf-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.bf-field > span {
+  white-space: nowrap;
+}
+
+.bf-field .bf-input {
+  max-width: 180px;
+}
+
+.bf-slip-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.bf-slip-actions .bf-button {
+  min-width: 96px;
+  min-height: 36px;
+}
+
+.bf-scores th,
+.bf-scores td {
+  height: 26px;
+}
+
+.bf-scores thead th:first-child,
+.bf-scores th[scope="row"] {
+  width: 64px;
+}
+
+/* ---- the end ------------------------------------------------------------------------------ */
+
+.bf-ending {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 16px;
+  padding: 12px;
+  align-items: start;
+}
+
+.bf-ending-account {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bf-closing-net {
+  border-top: 3px double var(--ink);
+  font-weight: 700;
+}
+
+/* ---- before the first day ---------------------------------------------------------------- */
+
+.bf-intro {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.bf-story {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 720px;
+  margin: auto;
+  max-height: 100%;
+  overflow: auto;
+  padding: 16px 20px;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  box-shadow: 8px 8px 0 var(--cyan);
+}
+
+.bf-story-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 3px double var(--ink);
+}
+
+.bf-story-head h1 {
+  font: 700 32px / 1.2 var(--serif);
+}
+
+.bf-story .bf-heading {
+  color: var(--ink);
+  font-size: 16px;
+  margin: 10px 0 4px;
+  white-space: pre;
+}
+
+.bf-story .bf-prose + .bf-prose {
+  margin-top: 0;
+}
+
+.bf-story .bf-slip-actions {
+  margin-top: 12px;
+}
+
+.bf-desk-full {
+  flex: 1;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+/* ---- 老板来了: an office memo, and nothing of the game ------------------------------------ */
+
+.bf-boss-page {
+  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  background: #ffffff;
+  color: #000000;
+  font:
+    13px / 1.5 system-ui,
+    sans-serif;
+}
+
+.bf-boss-text {
+  flex: 1;
+  min-height: 0;
+  box-sizing: border-box;
+  width: 100%;
+  resize: none;
+  padding: 10px 12px;
+  border: 1px solid #8a8a8a;
+  background: #ffffff;
+  color: #000000;
+  font:
+    15px / 1.9 "Songti SC",
+    "SimSun",
+    serif;
+  white-space: pre-wrap;
+}
+
+.bf-boss-spell {
+  white-space: pre-wrap;
+  padding: 6px 10px;
+  border: 1px solid #8a8a8a;
+  background: #f2f2f2;
+}
+
+.bf-boss-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.bf-boss-actions button {
+  min-width: 84px;
+  min-height: 28px;
+  padding: 2px 12px;
+  border: 1px solid #8a8a8a;
+  border-radius: 4px;
+  background: #f6f6f6;
+  color: #000000;
+  font: inherit;
+  white-space: pre;
+}
+
+.bf-boss-page :focus-visible {
+  outline: 2px solid #3b6fd4;
+  box-shadow: none;
+}
+
+.bf-message {
+  height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  color: #ffffff;
+  text-align: center;
+}
+
+/* ---- 768 to 1023: the trade bar lies under the two tables ---------------------------------- */
+
+@media (max-width: 1023px) {
+  .bf-trading {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) auto;
+  }
+
+  .bf-trade {
+    grid-row: 2;
+    grid-column: 1 / -1;
+    grid-template-columns: minmax(0, 1.4fr) 110px minmax(0, 1fr) minmax(0, 1fr) 64px 64px;
+    grid-template-areas:
+      "goods qty buy sell max all"
+      "hint hint hint hint hint hint";
+    align-items: center;
+  }
+
+  .bf-trade-goods {
+    grid-area: goods;
+  }
+
+  .bf-trade-quantity {
+    grid-area: qty;
+  }
+
+  .bf-buy {
+    grid-area: buy;
+  }
+
+  .bf-sell {
+    grid-area: sell;
+  }
+
+  .bf-all-buy {
+    grid-area: max;
+  }
+
+  .bf-all-sell {
+    grid-area: all;
+  }
+
+  .bf-trade-hint {
+    grid-area: hint;
+    min-height: 18px;
+  }
+
+  .bf {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    grid-template-rows: auto minmax(404px, 1fr) auto auto;
+    min-height: 692px;
+  }
+
+  .bf-ending {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ---- the phone: one column, one list, a trade bar inside the picked row ---------------------- */
+
+@media (max-width: 699px), (max-width: 949px) and (max-height: 449px) {
+  :root {
+    --row: 44px;
+    --gap: 6px;
+  }
+
+  body {
+    overflow: auto;
+  }
+
+  .bf {
+    height: auto;
+    min-height: 100%;
+    padding: 6px;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas:
+      "head"
+      "ledger"
+      "desk"
+      "map"
+      "venues";
+  }
+
+  .bf {
+    align-content: start;
+  }
+
+  /* The name keeps the first line to itself; what is true of it today goes under it. */
+  .bf-market .bf-cell {
+    flex-wrap: wrap;
+    row-gap: 0;
+    line-height: 1.3;
+  }
+
+  .bf-market .bf-name {
+    flex: 1 1 calc(100% - 24px);
+    white-space: normal;
+  }
+
+  .bf-market th {
+    padding-top: 3px;
+    padding-bottom: 3px;
+  }
+
+  .bf-market .bf-tag,
+  .bf-market .bf-note {
+    margin-left: 0;
+    font-size: 11px;
+    line-height: 15px;
+  }
+
+  .bf-market .bf-name + .bf-tag,
+  .bf-market .bf-name + .bf-note {
+    margin-left: 22px;
+  }
+
+  .bf-head {
+    gap: 6px;
+  }
+
+  .bf-title {
+    font-size: 16px;
+  }
+
+  .bf-where {
+    font-size: 14px;
+  }
+
+  .bf-dots {
+    gap: 1px;
+  }
+
+  .bf-dot {
+    width: 4px;
+    height: 4px;
+  }
+
+  .bf-heading {
+    display: none;
+  }
+
+  .bf-ledger dl {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .bf-ledger dl > div {
+    grid-column: span 2;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    height: auto;
+    line-height: 1.25;
+    padding: 2px 6px;
+    border-right: 1px solid var(--rule);
+  }
+
+  .bf-ledger dl > div:nth-child(n + 4) {
+    grid-column: span 3;
+    border-bottom: 0;
+  }
+
+  .bf-ledger dt {
+    font-size: 12px;
+  }
+
+  .bf-ledger dd {
+    text-align: right;
+    font-size: 15px;
+  }
+
+  .bf-delta {
+    margin-right: 4px;
+    font-size: 11px;
+  }
+
+  .bf-desk {
+    display: block;
+  }
+
+  .bf-trading {
+    display: block;
+  }
+
+  .bf-trading > .bf-table {
+    display: table;
+    overflow: visible;
+  }
+
+  .bf-table .bf-num {
+    width: 84px;
+  }
+
+  .bf-row-trade td {
+    height: auto;
+    padding: 6px;
+    white-space: normal;
+    background: var(--blue);
+  }
+
+  .bf-row-trade .bf-sub {
+    display: block;
+    margin-bottom: 4px;
+    color: #ffffff;
+  }
+
+  .bf-trade {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-areas:
+      "qty qty max all"
+      "buy buy sell sell"
+      "hint hint hint hint";
+    border-width: 0;
+    padding: 6px;
+  }
+
+  .bf-trade-goods {
+    display: none;
+  }
+
+  .bf-trade-quantity {
+    grid-area: qty;
+  }
+
+  .bf-trade-hint {
+    grid-area: hint;
+    min-height: 18px;
+  }
+
+  .bf-all-buy {
+    grid-area: max;
+  }
+
+  .bf-all-sell {
+    grid-area: all;
+  }
+
+  .bf-buy {
+    grid-area: buy;
+    min-height: 48px;
+  }
+
+  .bf-sell {
+    grid-area: sell;
+    min-height: 48px;
+  }
+
+  .bf-input {
+    height: 44px;
+  }
+
+  .bf-line {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: var(--gap);
+  }
+
+  .bf-station,
+  .bf-toggle,
+  .bf-boss {
+    margin: 0;
+    font-size: 13px;
+  }
+
+  .bf-toggle {
+    grid-area: auto;
+    grid-column: span 3;
+  }
+
+  .bf-boss {
+    grid-area: auto;
+    grid-column: span 2;
+  }
+
+  .bf-venues {
+    gap: var(--gap);
+  }
+
+  .bf-venues .bf-button {
+    min-height: 44px;
+    font-size: 13px;
+    gap: 2px;
+  }
+
+  .bf-venues .bf-icon {
+    display: none;
+  }
+
+  .bf-button {
+    min-height: 44px;
+  }
+
+  .bf-page {
+    flex-direction: column;
+    overflow: visible;
+  }
+
+  .bf-art {
+    height: 120px;
+  }
+
+  .bf-ending {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .bf-scores .bf-num:nth-child(4),
+  .bf-scores th:nth-child(4) {
+    display: none;
+  }
+
+  .bf-story {
+    padding: 12px;
+    box-shadow: none;
+  }
+
+  .bf-story-head h1 {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 349px) {
+  .bf-dots {
+    display: none;
+  }
+
+  .bf-station,
+  .bf-toggle,
+  .bf-boss,
+  .bf-venues .bf-button {
+    font-size: 12px;
+    padding: 2px;
+  }
+
+  .bf-table th,
+  .bf-table td {
+    padding: 0 4px;
+  }
+
+  .bf-table .bf-num {
+    width: 80px;
+  }
+
+  .bf-market .bf-held-count,
+  .bf-market thead .bf-num:last-child {
+    width: 40px;
+  }
+}
+
+/* A phone on its side: the list on the left, the numbers and the places on the right. */
+@media (max-width: 949px) and (max-height: 449px) and (orientation: landscape) {
+  .bf {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+      "head head"
+      "desk ledger"
+      "desk map"
+      "desk venues";
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bf-dot {
+    transition: none;
+  }
+}
+
+:root[data-motion="reduce"] .bf-dot {
+  transition: none;
+}
+
+.bf-scores .bf-num:nth-child(3) {
+  width: 120px;
+}

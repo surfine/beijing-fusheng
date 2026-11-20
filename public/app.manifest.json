@@ -1,0 +1,96 @@
+{
+  "id": "beijing-fusheng",
+  "version": "1.0.0",
+  "protocol": 1,
+  "kit": ">=1 <2",
+  "icon": "icon.svg",
+  "windows": [
+    {
+      "window": "beijingFusheng",
+      "app": "beijingFusheng",
+      "entry": "index.html",
+      "titleKey": "app_title",
+      "windowClass": "extracted-app-window",
+      "size": { "width": "1064px", "height": "744px" },
+      "capabilities": ["state", "files", "appearance", "snapshot"],
+      "menus": [
+        {
+          "id": "file",
+          "labelKey": "menu_system",
+          "items": [
+            { "type": "item", "action": "beijing-fusheng-new", "labelKey": "new_game", "conditionId": "beijing-fusheng-new" },
+            { "type": "item", "action": "beijing-fusheng-scores", "labelKey": "scores", "conditionId": "beijing-fusheng-scores" },
+            { "type": "item", "action": "beijing-fusheng-hacker", "labelKey": "hacker", "conditionId": "beijing-fusheng-hacker" },
+            { "type": "item", "action": "beijing-fusheng-boss", "labelKey": "boss", "conditionId": "beijing-fusheng-boss" },
+            { "type": "item", "action": "close-active-window", "labelKey": "close", "shortcutId": "close-window", "conditionId": "close-active-window" }
+          ]
+        },
+        {
+          "id": "places",
+          "labelKey": "menu_places",
+          "items": [
+            { "type": "item", "action": "beijing-fusheng-bank", "labelKey": "bank", "conditionId": "beijing-fusheng-bank" },
+            { "type": "item", "action": "beijing-fusheng-post", "labelKey": "post", "conditionId": "beijing-fusheng-post" },
+            { "type": "item", "action": "beijing-fusheng-hospital", "labelKey": "hospital", "conditionId": "beijing-fusheng-hospital" },
+            { "type": "item", "action": "beijing-fusheng-airport", "labelKey": "airport", "conditionId": "beijing-fusheng-airport" },
+            { "type": "item", "action": "beijing-fusheng-rent", "labelKey": "rent", "conditionId": "beijing-fusheng-rent" },
+            { "type": "item", "action": "beijing-fusheng-net", "labelKey": "net", "conditionId": "beijing-fusheng-net" }
+          ]
+        },
+        {
+          "id": "guide",
+          "labelKey": "menu_guide",
+          "items": [
+            { "type": "item", "action": "beijing-fusheng-beijing", "labelKey": "about_beijing", "conditionId": "beijing-fusheng-beijing" },
+            { "type": "item", "action": "beijing-fusheng-story", "labelKey": "story", "conditionId": "beijing-fusheng-story" },
+            { "type": "item", "action": "beijing-fusheng-about", "labelKey": "about_game", "conditionId": "beijing-fusheng-about" }
+          ]
+        },
+        { "id": "window", "hostMenu": "window" }
+      ]
+    }
+  ],
+  "intents": [],
+  "strings": {
+    "en": {
+      "app_title": "Beijing Fusheng",
+      "menu_system": "Game",
+      "menu_places": "Places",
+      "menu_guide": "Guide",
+      "new_game": "New Game",
+      "scores": "Top Ten",
+      "hacker": "Let Hackers Attack the Bank",
+      "boss": "The Boss Is Coming",
+      "close": "Close",
+      "bank": "Bank",
+      "post": "Post Office",
+      "hospital": "Hospital",
+      "airport": "Airport",
+      "rent": "Housing Agency",
+      "net": "Internet Café",
+      "about_beijing": "About Beijing",
+      "story": "The Story",
+      "about_game": "About This Game"
+    },
+    "zh": {
+      "app_title": "北京浮生记",
+      "menu_system": "系 统",
+      "menu_places": "重要场所",
+      "menu_guide": "帮 助",
+      "new_game": "新 游 戏",
+      "scores": "高手排行",
+      "hacker": "允许黑客攻击银行网络",
+      "boss": "老板来了",
+      "close": "关闭",
+      "bank": "银    行",
+      "post": "邮    局",
+      "hospital": "医    院",
+      "airport": "机    场",
+      "rent": "租房中介",
+      "net": "网    吧",
+      "about_beijing": "北京简介",
+      "story": "游戏故事",
+      "about_game": "关于本游戏"
+    }
+  }
+}

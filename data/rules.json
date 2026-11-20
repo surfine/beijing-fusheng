@@ -1,0 +1,605 @@
+{
+  "about": "《北京浮生记》V1.2.2 build 0103 的规则表。全部由 tools 脚本从 Beijing.exe 数据段导出，未手改；kernel/src/tables.rs 由本文件生成。",
+  "start": {
+    "cash": 2000,
+    "debt": 5000,
+    "deposit": 0,
+    "health": 100,
+    "fame": 100,
+    "days": 40,
+    "capacity": 100,
+    "capacityMax": 140,
+    "capacityStep": 10,
+    "source": "notes/RE-笔记.md §4；Beijing.exe FUN_00407887 / FUN_0040c546（开局后立即结息一次，首日所见欠债为 5500）"
+  },
+  "interest": {
+    "debtPercent": 10,
+    "depositPercent": 1,
+    "source": "notes/RE-笔记.md §4；Beijing.exe FUN_00409fb8，常量 0x4381b0=-0.1、0x4381a8=-0.01，向零取整"
+  },
+  "stockout": {
+    "picks": 3,
+    "picksLastDays": 0,
+    "lastDaysBelow": 3,
+    "source": "notes/RE-笔记.md §4；Beijing.exe FUN_00409911 尾部与 FUN_0040a0d0 开头"
+  },
+  "marketRoll": 950,
+  "healthRoll": 1000,
+  "moneyRoll": 1000,
+  "items": [
+    {
+      "id": "cigarette",
+      "name": "进口香烟",
+      "base": 100,
+      "span": 350,
+      "source": "notes/RE-笔记.md §4；Beijing.exe FUN_00409911（价格重掷），名称 0x44553c"
+    },
+    {
+      "id": "car",
+      "name": "走私汽车",
+      "base": 15000,
+      "span": 15000,
+      "source": "notes/RE-笔记.md §4；Beijing.exe FUN_00409911（价格重掷），名称 0x445530"
+    },
+    {
+      "id": "vcd",
+      "name": "盗版VCD、游戏",
+      "base": 5,
+      "span": 50,
+      "source": "notes/RE-笔记.md §4；Beijing.exe FUN_00409911（价格重掷），名称 0x445520"
+    },
+    {
+      "id": "liquor",
+      "name": "假白酒（剧毒！）",
+      "base": 1000,
+      "span": 2500,
+      "source": "notes/RE-笔记.md §4；Beijing.exe FUN_00409911（价格重掷），名称 0x44550c",
+      "fameOnSell": -10
+    },
+    {
+      "id": "book",
+      "name": "《上海小宝贝》（禁书）",
+      "base": 5000,
+      "span": 9000,
+      "source": "notes/RE-笔记.md §4；Beijing.exe FUN_00409911（价格重掷），名称 0x4454f4",
+      "fameOnSell": -7
+    },
+    {
+      "id": "toy",
+      "name": "进口玩具",
+      "base": 250,
+      "span": 600,
+      "source": "notes/RE-笔记.md §4；Beijing.exe FUN_00409911（价格重掷），名称 0x4454e8"
+    },
+    {
+      "id": "phone",
+      "name": "水货手机",
+      "base": 750,
+      "span": 750,
+      "source": "notes/RE-笔记.md §4；Beijing.exe FUN_00409911（价格重掷），名称 0x4454d0"
+    },
+    {
+      "id": "cosmetic",
+      "name": "伪劣化妆品",
+      "base": 65,
+      "span": 180,
+      "source": "notes/RE-笔记.md §4；Beijing.exe FUN_00409911（价格重掷），名称 0x4454dc"
+    }
+  ],
+  "market": [
+    {
+      "n": 170,
+      "item": 5,
+      "mul": 2,
+      "div": 0,
+      "add": 0,
+      "debt": 0,
+      "text": "专家提议提高大学生“动手素质”，进口玩具颇受欢迎!",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 行情表 0x444ae8"
+    },
+    {
+      "n": 139,
+      "item": 3,
+      "mul": 3,
+      "div": 0,
+      "add": 0,
+      "debt": 0,
+      "text": "有人自豪地说：生病不用打针吃药，喝假白酒（剧毒）就可以!",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 行情表 0x444b00"
+    },
+    {
+      "n": 100,
+      "item": 4,
+      "mul": 5,
+      "div": 0,
+      "add": 0,
+      "debt": 0,
+      "text": "医院的秘密报告：“《上海小宝贝》功效甚过伟哥”!",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 行情表 0x444b18"
+    },
+    {
+      "n": 41,
+      "item": 2,
+      "mul": 4,
+      "div": 0,
+      "add": 0,
+      "debt": 0,
+      "text": "文盲说：“2000年诺贝尔文学奖？呸！不如盗版VCD港台片。”",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 行情表 0x444b30"
+    },
+    {
+      "n": 37,
+      "item": 1,
+      "mul": 3,
+      "div": 0,
+      "add": 0,
+      "debt": 0,
+      "text": "《北京经济小报》社论：“走私汽车大力推进汽车消费!”",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 行情表 0x444b48"
+    },
+    {
+      "n": 23,
+      "item": 7,
+      "mul": 4,
+      "div": 0,
+      "add": 0,
+      "debt": 0,
+      "text": "《北京真理报》社论：“提倡爱美，落到实处”，伪劣化妆品大受欢迎!",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 行情表 0x444b60"
+    },
+    {
+      "n": 37,
+      "item": 4,
+      "mul": 8,
+      "div": 0,
+      "add": 0,
+      "debt": 0,
+      "text": "8858.com电子书店也不敢卖《上海小宝贝》，黑市一册可卖天价!",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 行情表 0x444b78"
+    },
+    {
+      "n": 15,
+      "item": 7,
+      "mul": 7,
+      "div": 0,
+      "add": 0,
+      "debt": 0,
+      "text": "谢不疯在晚会上说：“我酷!我使用伪劣化妆品!”，伪劣化妆品供不应求!",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 行情表 0x444b90"
+    },
+    {
+      "n": 40,
+      "item": 3,
+      "mul": 7,
+      "div": 0,
+      "add": 0,
+      "debt": 0,
+      "text": "北京有人狂饮山西假酒，可以卖出天价!",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 行情表 0x444ba8"
+    },
+    {
+      "n": 29,
+      "item": 6,
+      "mul": 7,
+      "div": 0,
+      "add": 0,
+      "debt": 0,
+      "text": "北京的大学生们开始找工作，水货手机大受欢迎！!",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 行情表 0x444bc0"
+    },
+    {
+      "n": 35,
+      "item": 1,
+      "mul": 8,
+      "div": 0,
+      "add": 0,
+      "debt": 0,
+      "text": "北京的富人疯狂地购买走私汽车！价格狂升!",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 行情表 0x444bd8"
+    },
+    {
+      "n": 17,
+      "item": 0,
+      "mul": 0,
+      "div": 8,
+      "add": 0,
+      "debt": 0,
+      "text": "市场上充斥着来自福建的走私香烟!",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 行情表 0x444bf0"
+    },
+    {
+      "n": 24,
+      "item": 5,
+      "mul": 0,
+      "div": 5,
+      "add": 0,
+      "debt": 0,
+      "text": "北京的孩子们都忙于上网学习，进口玩具没人愿意买。",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 行情表 0x444c08"
+    },
+    {
+      "n": 18,
+      "item": 2,
+      "mul": 0,
+      "div": 8,
+      "add": 0,
+      "debt": 0,
+      "text": "盗版业十分兴旺，“中国硅谷”——中关村全是卖盗版VCD的村姑!",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 行情表 0x444c20"
+    },
+    {
+      "n": 160,
+      "item": 1,
+      "mul": 0,
+      "div": 0,
+      "add": 2,
+      "debt": 0,
+      "text": "厦门的老同学资助俺两部走私汽车！发了！！",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 行情表 0x444c38"
+    },
+    {
+      "n": 45,
+      "item": 0,
+      "mul": 0,
+      "div": 0,
+      "add": 6,
+      "debt": 0,
+      "text": "工商局扫荡后，俺在黑暗角落里发现了老乡丢失的进口香烟。",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 行情表 0x444c50"
+    },
+    {
+      "n": 35,
+      "item": 3,
+      "mul": 0,
+      "div": 0,
+      "add": 4,
+      "debt": 0,
+      "text": "俺老乡回家前把一些山西假白酒（剧毒）给俺!",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 行情表 0x444c68"
+    },
+    {
+      "n": 140,
+      "item": 6,
+      "mul": 0,
+      "div": 0,
+      "add": 1,
+      "debt": 2500,
+      "text": "媒体报道：又有日本出口到中国的产品出事了! 出事后日本人死不认帐,拒绝赔偿。村长得知此消息，托人把他用的水货手机（无任何厂商标识）硬卖给您，收您2500元。",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 行情表 0x444c80"
+    }
+  ],
+  "health": [
+    {
+      "n": 117,
+      "damage": 3,
+      "text": "大街上两个流氓打了俺!",
+      "sound": "kill.wav",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 掉血表 0x444c98"
+    },
+    {
+      "n": 157,
+      "damage": 20,
+      "text": "俺在过街地道被人打了蒙棍! ",
+      "sound": "death.wav",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 掉血表 0x444ca8"
+    },
+    {
+      "n": 21,
+      "damage": 1,
+      "text": "工商局的追俺超过三个胡同。 ",
+      "sound": "dog.wav",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 掉血表 0x444cb8"
+    },
+    {
+      "n": 100,
+      "damage": 1,
+      "text": "北京拥挤的交通让俺心焦! ",
+      "sound": "harley.wav",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 掉血表 0x444cc8"
+    },
+    {
+      "n": 35,
+      "damage": 1,
+      "text": "开小巴的打俺一耳光!",
+      "sound": "hit.wav",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 掉血表 0x444cd8"
+    },
+    {
+      "n": 313,
+      "damage": 10,
+      "text": "一群民工打了俺!",
+      "sound": "flee.wav",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 掉血表 0x444ce8"
+    },
+    {
+      "n": 120,
+      "damage": 5,
+      "text": "附近胡同的一个小青年砸俺一砖头!",
+      "sound": "death.wav",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 掉血表 0x444cf8"
+    },
+    {
+      "n": 29,
+      "damage": 3,
+      "text": "附近写字楼一个假保安用电棍电击俺!",
+      "sound": "el.wav",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 掉血表 0x444d08"
+    },
+    {
+      "n": 43,
+      "damage": 1,
+      "text": "北京臭黑的小河熏着我了! ",
+      "sound": "vomit.wav",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 掉血表 0x444d18"
+    },
+    {
+      "n": 45,
+      "damage": 1,
+      "text": "守自行车的王大婶嘲笑俺没北京户口!",
+      "sound": "level.wav",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 掉血表 0x444d28"
+    },
+    {
+      "n": 48,
+      "damage": 1,
+      "text": "北京高温40度!俺热...",
+      "sound": "lan.wav",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 掉血表 0x444d38"
+    },
+    {
+      "n": 33,
+      "damage": 1,
+      "text": "申奥添了新风景，北京又来沙尘暴!",
+      "sound": "breath.wav",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 掉血表 0x444d48"
+    }
+  ],
+  "money": [
+    {
+      "n": 60,
+      "percent": 10,
+      "target": "cash",
+      "text": "俺怜悯地铁口扮演成乞丐的老太太。",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 掉钱表 0x444d58"
+    },
+    {
+      "n": 125,
+      "percent": 10,
+      "target": "cash",
+      "text": "一个汉子在街头拦住俺：“哥们，给点钱用!”。",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 掉钱表 0x444d64"
+    },
+    {
+      "n": 100,
+      "percent": 40,
+      "target": "cash",
+      "text": "一个大个子碰了俺一下，说：“别挤了!”。",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 掉钱表 0x444d70"
+    },
+    {
+      "n": 65,
+      "percent": 20,
+      "target": "cash",
+      "text": "三个带红袖章的老太太揪住俺：“你是外地人?罚款!”",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 掉钱表 0x444d7c"
+    },
+    {
+      "n": 35,
+      "percent": 15,
+      "target": "deposit",
+      "text": "两个猛男揪住俺：“交长话附加费、上网费。”",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 掉钱表 0x444d88"
+    },
+    {
+      "n": 27,
+      "percent": 10,
+      "target": "deposit",
+      "text": "副主任说：“办经商证?晚上不要去我家给我送钱哦。”",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 掉钱表 0x444d94"
+    },
+    {
+      "n": 40,
+      "percent": 5,
+      "target": "cash",
+      "text": "北京空气污染得厉害,俺去氧吧吸氧...",
+      "source": "notes/RE-笔记.md §4；Beijing.exe 掉钱表 0x444da0"
+    }
+  ],
+  "coma": {
+    "healthBelow": 85,
+    "daysAbove": 3,
+    "maxDays": 2,
+    "feeBase": 1000,
+    "feeSpan": 8500,
+    "heal": 10,
+    "source": "notes/RE-笔记.md §4；Beijing.exe FUN_0040a531"
+  },
+  "crisis": {
+    "healthBelow": 20,
+    "source": "notes/RE-笔记.md §4；Beijing.exe FUN_0040a531"
+  },
+  "beating": {
+    "debtAbove": 100000,
+    "damage": 30,
+    "source": "notes/RE-笔记.md §4；Beijing.exe FUN_0040a0d0"
+  },
+  "hacker": {
+    "n": 25,
+    "minDeposit": 1000,
+    "smallBelow": 100001,
+    "smallDiv": 15,
+    "bigDiv": 20,
+    "bigDivBase": 2,
+    "gainMod": 3,
+    "source": "notes/RE-笔记.md §4；Beijing.exe FUN_0040b6d2"
+  },
+  "hospital": {
+    "pricePerPoint": 3500,
+    "source": "notes/RE-笔记.md §4；Beijing.exe FUN_0040b095"
+  },
+  "rent": {
+    "minCash": 30000,
+    "flatQuote": 20000,
+    "flatCharge": 25000,
+    "cheat": 2000,
+    "source": "notes/RE-笔记.md §4；Beijing.exe FUN_0040c2c4 / 0x406522"
+  },
+  "netcafe": {
+    "minCash": 15,
+    "maxVisits": 3,
+    "gainSpan": 10,
+    "source": "notes/RE-笔记.md §4；Beijing.exe FUN_0040bfd9"
+  },
+  "fameTiers": [
+    {
+      "below": 20,
+      "name": "江湖唾弃"
+    },
+    {
+      "below": 40,
+      "name": "差"
+    },
+    {
+      "below": 60,
+      "name": "争议人物"
+    },
+    {
+      "below": 80,
+      "name": "不佳"
+    },
+    {
+      "below": 90,
+      "name": "一般般"
+    },
+    {
+      "below": 100,
+      "name": "杰出青年"
+    },
+    {
+      "below": null,
+      "name": "德高望重"
+    }
+  ],
+  "fameSource": "notes/RE-笔记.md §4；Beijing.exe FUN_0040f513",
+  "stations": ["建国门", "北京站", "西直门", "崇文门", "东直门", "复兴门", "积水潭", "长椿街", "公主坟", "苹果园"],
+  "groundStations": [
+    "永安里",
+    "方 庄",
+    "海淀大街",
+    "永定门",
+    "三元西桥",
+    "府右街",
+    "亚运村",
+    "玉泉营",
+    "翠微路",
+    "八角西路"
+  ],
+  "groundComaNames": [
+    "永安里",
+    "方 庄",
+    "海淀大街",
+    "永定门",
+    "三元东桥",
+    "文津街",
+    "北辰西路",
+    "菜户营",
+    "翠微路",
+    "八角地铁"
+  ],
+  "stationSource": "notes/RE-笔记.md §4；Beijing.exe FUN_0040caa3（按钮文字）与 FUN_0040a531（昏迷地点名，按 0x760 的 1–10 编号）",
+  "comaPlaces": [
+    "发廊里",
+    "早点摊上",
+    "报摊上",
+    "烤羊肉摊上",
+    "公共汽车里",
+    "人力车上",
+    "女厕所里",
+    "男厕所里",
+    "电话亭里",
+    "三陪女怀里",
+    "出租车里",
+    "小巴里",
+    "美容院里",
+    "小商亭里",
+    "小商场里",
+    "民工脚下",
+    "流动摊里",
+    "草地上",
+    "电线杆下",
+    "小饭馆里",
+    "马路上",
+    "人行道上",
+    "街心公园里",
+    "广告牌下",
+    "公共汽车站里",
+    "长途汽车站里",
+    "卖盗版游戏的旁边",
+    "网络公司尸体旁边",
+    "行骗的知本家旁边"
+  ],
+  "titles": ["北京市优秀赚钱员", "北京十大杰出小青年", "京城最酷倒卖手", "京都捞钱大师", "北京第一金手指"],
+  "scoreSeeds": [
+    {
+      "name": "赖皮张",
+      "score": 12500720,
+      "health": 98,
+      "fame": "争议人物"
+    },
+    {
+      "name": "萧峰",
+      "score": 830050,
+      "health": 100,
+      "fame": "杰出青年"
+    },
+    {
+      "name": "二黑",
+      "score": 500447,
+      "health": 78,
+      "fame": "德高望重"
+    },
+    {
+      "name": "Andy Rocky",
+      "score": 239403,
+      "health": 97,
+      "fame": "很差"
+    },
+    {
+      "name": "li xing",
+      "score": 34900,
+      "health": 35,
+      "fame": "江湖唾弃"
+    },
+    {
+      "name": "li xing",
+      "score": 13400,
+      "health": 100,
+      "fame": "江湖唾弃"
+    },
+    {
+      "name": "li ",
+      "score": 2300,
+      "health": 77,
+      "fame": "不佳"
+    },
+    {
+      "name": "li ",
+      "score": 45,
+      "health": 12,
+      "fame": "杰出青年"
+    },
+    {
+      "name": "li",
+      "score": 34,
+      "health": 100,
+      "fame": "一般般"
+    },
+    {
+      "name": "li",
+      "score": 3,
+      "health": 100,
+      "fame": "杰出青年"
+    }
+  ],
+  "scoreSource": "notes/RE-笔记.md §4；Beijing.exe FUN_0040f0ab（score.txt 不存在时的默认榜）"
+}

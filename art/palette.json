@@ -1,0 +1,47 @@
+{
+  "roles": {
+    "ground": {
+      "light": "#0000FF",
+      "dark": "#0000C8",
+      "note": "蓝底：内容区底色、页眉、选中行"
+    },
+    "paper": {
+      "light": "#FFFFFF",
+      "dark": "#0A0A14",
+      "note": "纸：表格与账页"
+    },
+    "ink": {
+      "light": "#000000",
+      "dark": "#FFFFFF",
+      "note": "黑线：字、栏线、描边"
+    },
+    "type": {
+      "light": "#FFFF00",
+      "dark": "#FFFF00",
+      "note": "黄字：蓝底上的标题、涨、欠债增量"
+    },
+    "aid": {
+      "light": "#00FFFF",
+      "dark": "#00FFFF",
+      "note": "青辅：持有标记、图标的硬边影"
+    },
+    "muted": {
+      "light": "#808080",
+      "dark": "#808080",
+      "note": "灰：缺货、买不起、不可用"
+    }
+  },
+  "art": {
+    "blue": "#0000FF",
+    "white": "#FFFFFF",
+    "yellow": "#FFFF00",
+    "cyan": "#00FFFF",
+    "black": "#000000",
+    "gray": "#C0C0C0",
+    "darkGray": "#808080",
+    "red": "#FF0000",
+    "green": "#008000",
+    "brightGreen": "#00FF00",
+    "olive": "#808000"
+  }
+}

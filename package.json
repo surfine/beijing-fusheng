@@ -1,0 +1,30 @@
+{
+  "name": "beijing-fusheng",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -b",
+    "lint": "biome check .",
+    "test": "vitest run",
+    "check": "npm run typecheck && npm run lint && npm run test && npm run build && ais6-app check .",
+    "kernel": "node tools/build-kernel.mjs",
+    "kernel:test": "cd kernel && cargo test --release",
+    "art": "node tools/build-art.mjs"
+  },
+  "dependencies": {
+    "preact": "11.2.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.6.7",
+    "@preact/preset-vite": "2.10.6",
+    "ais6-app": "^0.4.0",
+    "typescript": "7.0.2",
+    "vite": "8.3.8",
+    "vitest": "5.1.0"
+  }
+}
