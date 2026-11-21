@@ -1,3 +1,8 @@
+<!-- canonical-source: packages/beijing-fusheng/README.md -->
+<!-- source-sha256: 39ab1c8c24478b575f459a60274be417e212a9187dee800695e1e8eec1ca6f7e -->
+
+> 英文版为准 ・ 仅供人类参考
+
 # 北京浮生记
 
 AI System 6 的一个应用：2001 年的 Windows 共享软件《北京浮生记》（Beijing.exe V1.2.2 build 0103），规则和文案照原样，跑在桌面的一个窗口里。
@@ -5,6 +10,9 @@ AI System 6 的一个应用：2001 年的 Windows 共享软件《北京浮生记
 **这个游戏是郭祥昊的（Guoly Computing，2001）。** 您在里面读到的每一个字、每一个价格、每一件事、每一句玩笑，都是他写的。本包是经他同意做的移植：规则照他的程序重写，文字一个字没改地搬过来，图是照他的图重画的。这里新做的只有工程和版面。
 
 <p><img src="screenshots/beijing-fusheng-classic.png" width="49%" alt="北京浮生记 · Classic"> <img src="screenshots/beijing-fusheng-liquid-glass.png" width="49%" alt="北京浮生记 · Liquid Glass"></p>
+
+<p><img src="screenshots/beijing-fusheng-ledger.png" width="49%" alt="第 0 天的账本：黑市、出租屋和五个数"> <img src="screenshots/beijing-fusheng-news.png" width="49%" alt="北京新闻一页取代交易台"></p>
+<p><img src="screenshots/beijing-fusheng-dark.png" width="74%" alt="深色模式下的同一本账"> <img src="screenshots/beijing-fusheng-phone.png" width="24%" alt="手机宽度 390 点"></p>
 
 您从家乡来到北京，身上 2000 元，欠村长的债每天涨一成。四十天里，在二环十个地铁站之间倒卖八种灰色商品。
 

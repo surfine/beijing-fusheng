@@ -13,6 +13,9 @@ engineering and the layout.
 
 <p><img src="screenshots/beijing-fusheng-classic.png" width="49%" alt="北京浮生记 · Classic"> <img src="screenshots/beijing-fusheng-liquid-glass.png" width="49%" alt="北京浮生记 · Liquid Glass"></p>
 
+<p><img src="screenshots/beijing-fusheng-ledger.png" width="49%" alt="The ledger on day 0: black market, rented room and five numbers"> <img src="screenshots/beijing-fusheng-news.png" width="49%" alt="A Beijing News page replaces the trading desk"></p>
+<p><img src="screenshots/beijing-fusheng-dark.png" width="74%" alt="The same ledger in dark mode"> <img src="screenshots/beijing-fusheng-phone.png" width="24%" alt="Phone width, 390 points"></p>
+
 You arrive in Beijing with 2000 yuan and a debt to the village head that
 grows ten percent a day. You have forty days to trade eight kinds of grey
 goods between ten subway stations.

@@ -1,3 +1,8 @@
+<!-- canonical-source: packages/beijing-fusheng/LICENSES.md -->
+<!-- source-sha256: 745223bd093e1cc416f797874f34bd8f07ce4c898631ac0ba175a2ee403d762d -->
+
+> 英文版为准 ・ 仅供人类参考
+
 # 包里有什么，各归谁
 
 | 部分 | 来源 | 许可 | 依据 |

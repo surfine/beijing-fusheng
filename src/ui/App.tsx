@@ -57,7 +57,7 @@ export function App({ game, t, narrow, onSave }: Props) {
   const page = desk.pages[0];
   const playing = desk.phase === "play";
   return (
-    <div class="bf" data-narrow={narrow ? "" : undefined}>
+    <main class="bf" data-narrow={narrow ? "" : undefined}>
       <header class="bf-head">
         <Icon name="city" size={32} />
         <h1 class="bf-title">{windowTitle(view.daysLeft)}</h1>
@@ -92,7 +92,7 @@ export function App({ game, t, narrow, onSave }: Props) {
           </button>
         ))}
       </nav>
-    </div>
+    </main>
   );
 }
 
@@ -887,15 +887,15 @@ function Intro({ game, t }: { game: Game; t: Translate }) {
   const input = useFocus<HTMLInputElement>("intro");
   if (game.desk.sheet) {
     return (
-      <div class="bf bf-intro">
+      <main class="bf bf-intro">
         <section class="bf-desk bf-desk-full">
           <SheetView game={game} t={t} />
         </section>
-      </div>
+      </main>
     );
   }
   return (
-    <div class="bf bf-intro">
+    <main class="bf bf-intro">
       <form
         class="bf-story"
         onSubmit={(event) => {
@@ -935,7 +935,7 @@ function Intro({ game, t }: { game: Game; t: Translate }) {
           </button>
         </div>
       </form>
-    </div>
+    </main>
   );
 }
 
@@ -954,7 +954,7 @@ function Boss({ game, onSave }: { game: Game; onSave: () => void }) {
   const writing = dialog(168);
   const area = useFocus<HTMLTextAreaElement>("boss");
   return (
-    <div class="bf-boss-page">
+    <main class="bf-boss-page">
       <textarea ref={area} class="bf-boss-text" spellcheck={false} aria-label={writing.title}>
         {bossDocument()}
       </textarea>
@@ -970,6 +970,6 @@ function Boss({ game, onSave }: { game: Game; onSave: () => void }) {
           {writing.buttons[1115]}
         </button>
       </div>
-    </div>
+    </main>
   );
 }
