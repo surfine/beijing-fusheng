@@ -92,7 +92,7 @@ export function pagesFor(events: readonly GameEvent[], view: View): Page[] {
         pages.push(diary((rules.health[event.a]?.text ?? "") + sprintf(text.healthLost, event.b)));
         break;
       case Ev.coma: {
-        // The original names the place with its own table (0x40a531), which
+        // The original names the place with its own table (in DoRandomEvent), which
         // differs from the map's captions on the ground map.
         const names = view.ground ? rules.groundComaNames : rules.stations;
         const where = names[view.location - 1] ?? "";

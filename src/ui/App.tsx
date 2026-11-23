@@ -950,7 +950,7 @@ export function bossDocument(): string {
   ].join("\n");
 }
 
-function Boss({ game, onSave }: { game: Game; onSave: () => void }) {
+export function Boss({ game, onSave }: { game: Game; onSave: () => void }) {
   const writing = dialog(168);
   const area = useFocus<HTMLTextAreaElement>("boss");
   return (

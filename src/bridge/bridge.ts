@@ -10,7 +10,7 @@ import type { Appearance, BridgeClient, MenuState, SuspendCause } from "./types.
 export const APP_ID = "beijingFusheng";
 export const WINDOW_NAME = "beijingFusheng";
 /** Must equal the manifest's and package.json's version, or the desk refuses the connection. */
-export const APP_VERSION = "1.0.0";
+export const APP_VERSION = "1.1.0";
 
 export type { BridgeClient } from "./types.ts";
 

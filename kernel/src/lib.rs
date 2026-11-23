@@ -1,5 +1,5 @@
 //! The rules of 北京浮生记 (Beijing.exe V1.2.2 build 0103, 2001), rewritten
-//! from the decompiled original. No DOM, no clock, no network: a state of
+//! from the original. No DOM, no clock, no network: a state of
 //! 64 integers, a seeded generator, and commands that say what happened.
 //!
 //! Every number is in `tables.rs`, generated from `data/rules.json`, which
@@ -162,7 +162,7 @@ impl Game {
         ((next >> 16) & 0x7fff) as i64
     }
 
-    /// The original's helper at 0x4076cf: rand() % n.
+    /// The original's RandomNum: rand() % n.
     fn roll(&mut self, n: i64) -> i64 {
         self.rand() % n
     }
@@ -178,7 +178,7 @@ impl Game {
         self.s[STATUS] == STATUS_PLAYING
     }
 
-    // -- new game (FUN_0040c546) --------------------------------------------
+    // -- new game (OnNewGame) ------------------------------------------------
 
     pub fn new_game(&mut self, seed: u32, hacker: bool) {
         let scores = self.scores();
@@ -218,7 +218,7 @@ impl Game {
         }
     }
 
-    // -- prices (FUN_00409911) ----------------------------------------------
+    // -- prices (makeDrugPrices) ----------------------------------------------
 
     fn reroll(&mut self, out_of_stock: i64) {
         for item in 0..8 {
@@ -234,7 +234,7 @@ impl Game {
         self.emit(EV_PRICES, missing, 0, 0);
     }
 
-    // -- interest (FUN_00409fb8) --------------------------------------------
+    // -- interest (HandleCashAndDebt) --------------------------------------------
 
     fn interest(&mut self) {
         let debt = self.s[DEBT] * DEBT_PERCENT / 100;
@@ -244,7 +244,7 @@ impl Game {
         self.emit(EV_INTEREST, debt, deposit, 0);
     }
 
-    // -- one day (FUN_0040a0d0) ---------------------------------------------
+    // -- one day (the ten OnLoc… handlers) ---------------------------------------------
 
     fn day(&mut self) {
         let before = self.s[DAYS];
@@ -274,7 +274,7 @@ impl Game {
         }
     }
 
-    // -- the market table (FUN_004099d3) ------------------------------------
+    // -- the market table (gameMessages) ------------------------------------
 
     fn market_events(&mut self) {
         for row in 0..MARKET_TABLE.len() {
@@ -310,7 +310,7 @@ impl Game {
         }
     }
 
-    // -- the health table and the hospital bed (FUN_0040a531) ----------------
+    // -- the health table and the hospital bed (DoRandomEvent) ----------------
 
     fn health_events(&mut self) {
         for row in 0..HEALTH_TABLE.len() {
@@ -342,7 +342,7 @@ impl Game {
         }
     }
 
-    // -- the money table and the hacker (FUN_0040b6d2) -----------------------
+    // -- the money table and the hacker (OnSteal) -----------------------
 
     fn money_events(&mut self) {
         for row in 0..MONEY_TABLE.len() {
@@ -385,7 +385,7 @@ impl Game {
         }
     }
 
-    // -- the end (FUN_0040a0d0 tail, FUN_0040bcb8) ---------------------------
+    // -- the end ---------------------------
 
     fn auto_sell(&mut self) {
         let mut held = 0;
@@ -422,7 +422,7 @@ impl Game {
             self.end(ENDING_DEPORTED);
             return;
         }
-        // FUN_0040f57b: the first place whose score is not above ours.
+        // The first place whose score is not above ours.
         let mut place = 0;
         while place < 10 && net < self.s[SCORE_0 + place] {
             place += 1;
@@ -438,7 +438,7 @@ impl Game {
         }
         self.s[SCORE_0 + place] = net;
         self.s[RANK] = place as i64 + 1;
-        // FUN_00407416 picks one of five honours with a bare rand() % 5.
+        // The original picks one of five honours with a bare rand() % 5.
         self.s[TITLE] = self.rand() % TITLES;
         self.end(ENDING_RANKED);
     }
@@ -492,7 +492,7 @@ impl Game {
         if most > i32::MAX as i64 { i32::MAX } else { most as i32 }
     }
 
-    /// FUN_004083f4 and the first half of FUN_004087e2.
+    /// Buying: OnAdd and the first half of MoveListItems.
     pub fn buy(&mut self, item: i32, quantity: i32) -> i32 {
         self.event_count = 0;
         let most = self.max_buy(item);
@@ -514,7 +514,7 @@ impl Game {
         OK
     }
 
-    /// The second half of FUN_004087e2.
+    /// The second half of MoveListItems.
     pub fn sell(&mut self, item: i32, quantity: i32) -> i32 {
         self.event_count = 0;
         if !self.playing() {
@@ -584,7 +584,7 @@ impl Game {
                 self.s[CASH] += argument;
                 OK
             }
-            // FUN_0040b095
+            // OnHospital
             VENUE_HOSPITAL => {
                 if self.s[HEALTH] >= 100 {
                     return E_HEALTHY;
@@ -600,7 +600,7 @@ impl Game {
                 self.s[CASH] -= fee;
                 OK
             }
-            // FUN_0040b29a
+            // OnPostoffice
             VENUE_POST => {
                 if self.s[DEBT] == 0 {
                     let wealth = self.s[DEPOSIT] + self.s[CASH];
@@ -628,7 +628,7 @@ impl Game {
                 self.s[CASH] -= argument;
                 OK
             }
-            // FUN_0040c2c4
+            // OnHouseAgency
             VENUE_RENT => {
                 if self.s[CAPACITY] >= CAPACITY_MAX {
                     return E_RENT_MAX;
@@ -647,7 +647,7 @@ impl Game {
                 self.emit(EV_RENTED, self.s[CAPACITY], cash - left, 0);
                 OK
             }
-            // FUN_0040bfd9
+            // OnWangba
             VENUE_NET => {
                 if self.s[NET_VISITS] >= NET_MAX_VISITS {
                     return E_NET_TOO_MANY;

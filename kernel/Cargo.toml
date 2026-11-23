@@ -2,7 +2,7 @@
 name = "beijing-kernel"
 version = "0.1.0"
 edition = "2021"
-license = "MIT"
+license = "GPL-2.0-only"
 publish = false
 
 [lib]

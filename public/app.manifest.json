@@ -1,6 +1,6 @@
 {
   "id": "beijing-fusheng",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "protocol": 1,
   "kit": ">=1 <2",
   "icon": "icon.svg",
@@ -11,42 +11,130 @@
       "entry": "index.html",
       "titleKey": "app_title",
       "windowClass": "extracted-app-window",
-      "size": { "width": "1064px", "height": "744px" },
-      "capabilities": ["state", "files", "appearance", "snapshot"],
+      "size": {
+        "width": "1064px",
+        "height": "744px"
+      },
+      "capabilities": [
+        "state",
+        "files",
+        "appearance",
+        "snapshot"
+      ],
       "menus": [
         {
           "id": "file",
           "labelKey": "menu_system",
           "items": [
-            { "type": "item", "action": "beijing-fusheng-new", "labelKey": "new_game", "conditionId": "beijing-fusheng-new" },
-            { "type": "item", "action": "beijing-fusheng-scores", "labelKey": "scores", "conditionId": "beijing-fusheng-scores" },
-            { "type": "item", "action": "beijing-fusheng-hacker", "labelKey": "hacker", "conditionId": "beijing-fusheng-hacker" },
-            { "type": "item", "action": "beijing-fusheng-boss", "labelKey": "boss", "conditionId": "beijing-fusheng-boss" },
-            { "type": "item", "action": "close-active-window", "labelKey": "close", "shortcutId": "close-window", "conditionId": "close-active-window" }
+            {
+              "type": "item",
+              "action": "beijing-fusheng-new",
+              "labelKey": "new_game",
+              "conditionId": "beijing-fusheng-new"
+            },
+            {
+              "type": "item",
+              "action": "beijing-fusheng-scores",
+              "labelKey": "scores",
+              "conditionId": "beijing-fusheng-scores"
+            },
+            {
+              "type": "item",
+              "action": "beijing-fusheng-hacker",
+              "labelKey": "hacker",
+              "conditionId": "beijing-fusheng-hacker"
+            },
+            {
+              "type": "item",
+              "action": "beijing-fusheng-classic",
+              "labelKey": "classic_layout",
+              "conditionId": "beijing-fusheng-classic"
+            },
+            {
+              "type": "item",
+              "action": "beijing-fusheng-boss",
+              "labelKey": "boss",
+              "conditionId": "beijing-fusheng-boss"
+            },
+            {
+              "type": "item",
+              "action": "close-active-window",
+              "labelKey": "close",
+              "shortcutId": "close-window",
+              "conditionId": "close-active-window"
+            }
           ]
         },
         {
           "id": "places",
           "labelKey": "menu_places",
           "items": [
-            { "type": "item", "action": "beijing-fusheng-bank", "labelKey": "bank", "conditionId": "beijing-fusheng-bank" },
-            { "type": "item", "action": "beijing-fusheng-post", "labelKey": "post", "conditionId": "beijing-fusheng-post" },
-            { "type": "item", "action": "beijing-fusheng-hospital", "labelKey": "hospital", "conditionId": "beijing-fusheng-hospital" },
-            { "type": "item", "action": "beijing-fusheng-airport", "labelKey": "airport", "conditionId": "beijing-fusheng-airport" },
-            { "type": "item", "action": "beijing-fusheng-rent", "labelKey": "rent", "conditionId": "beijing-fusheng-rent" },
-            { "type": "item", "action": "beijing-fusheng-net", "labelKey": "net", "conditionId": "beijing-fusheng-net" }
+            {
+              "type": "item",
+              "action": "beijing-fusheng-bank",
+              "labelKey": "bank",
+              "conditionId": "beijing-fusheng-bank"
+            },
+            {
+              "type": "item",
+              "action": "beijing-fusheng-post",
+              "labelKey": "post",
+              "conditionId": "beijing-fusheng-post"
+            },
+            {
+              "type": "item",
+              "action": "beijing-fusheng-hospital",
+              "labelKey": "hospital",
+              "conditionId": "beijing-fusheng-hospital"
+            },
+            {
+              "type": "item",
+              "action": "beijing-fusheng-airport",
+              "labelKey": "airport",
+              "conditionId": "beijing-fusheng-airport"
+            },
+            {
+              "type": "item",
+              "action": "beijing-fusheng-rent",
+              "labelKey": "rent",
+              "conditionId": "beijing-fusheng-rent"
+            },
+            {
+              "type": "item",
+              "action": "beijing-fusheng-net",
+              "labelKey": "net",
+              "conditionId": "beijing-fusheng-net"
+            }
           ]
         },
         {
           "id": "guide",
           "labelKey": "menu_guide",
           "items": [
-            { "type": "item", "action": "beijing-fusheng-beijing", "labelKey": "about_beijing", "conditionId": "beijing-fusheng-beijing" },
-            { "type": "item", "action": "beijing-fusheng-story", "labelKey": "story", "conditionId": "beijing-fusheng-story" },
-            { "type": "item", "action": "beijing-fusheng-about", "labelKey": "about_game", "conditionId": "beijing-fusheng-about" }
+            {
+              "type": "item",
+              "action": "beijing-fusheng-beijing",
+              "labelKey": "about_beijing",
+              "conditionId": "beijing-fusheng-beijing"
+            },
+            {
+              "type": "item",
+              "action": "beijing-fusheng-story",
+              "labelKey": "story",
+              "conditionId": "beijing-fusheng-story"
+            },
+            {
+              "type": "item",
+              "action": "beijing-fusheng-about",
+              "labelKey": "about_game",
+              "conditionId": "beijing-fusheng-about"
+            }
           ]
         },
-        { "id": "window", "hostMenu": "window" }
+        {
+          "id": "window",
+          "hostMenu": "window"
+        }
       ]
     }
   ],
@@ -70,7 +158,8 @@
       "net": "Internet Café",
       "about_beijing": "About Beijing",
       "story": "The Story",
-      "about_game": "About This Game"
+      "about_game": "About This Game",
+      "classic_layout": "Classic Layout"
     },
     "zh": {
       "app_title": "北京浮生记",
@@ -90,7 +179,8 @@
       "net": "网    吧",
       "about_beijing": "北京简介",
       "story": "游戏故事",
-      "about_game": "关于本游戏"
+      "about_game": "关于本游戏",
+      "classic_layout": "经典版面"
     }
   }
 }
